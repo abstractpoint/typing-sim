@@ -10,6 +10,7 @@
                 }
                 #display-container {
                         padding: 10px;
+                        font-size: 30px;
                 }
                 #cpm-container {
                         padding: 10px;
@@ -40,7 +41,9 @@
                         if (event.key.toLowerCase() === sequence[pointer]) {
                                 pointer = (pointer + 1) < sequence.length ? pointer + 1 : 0;
                                 display.textContent = sequence[pointer].toUpperCase();
-                                const timeDelta = new Date().getTime() - timer;
+                                const currentTimer = new Date().getTime();
+                                const timeDelta = currentTimer - timer;
+                                timer = currentTimer;
                                 cpm.textContent = `${Math.floor(60e3 / timeDelta)} ch/m`;
                         } else {
                                 audio.play();
