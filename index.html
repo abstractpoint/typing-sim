@@ -11,16 +11,23 @@
                 #display-container {
                         padding: 10px;
                 }
+                #cpm-container {
+                        padding: 10px;
+                        color: #cccccc;
+                }
         </style>
 </head>
 <body>
         <div id="display-container"></div>
+        <div id="cpm-container"></div>
         <script src="main.js"></script>
         <script>
                 const sequence = 'abcdefghijklmnopqrstuvwxyz'.split('');
                 let pointer = 0;
                 const audio = new Audio('stop-13692.mp3');
                 const display = document.querySelector('#display-container');
+                const cpm = document.querySelector('#cpm-container');
+                let timer = new Date().getTime()
                 // for the first initialization
                 document.addEventListener("DOMContentLoaded", function(event) { 
                   display.textContent = sequence[pointer].toUpperCase();
@@ -29,14 +36,15 @@
                         if (event.isComposing || event.keyCode === 229) {
                                 return;
                         }
-                        // on key  
-                        audio.play();
+                        // on key
                         if (event.key.toLowerCase() === sequence[pointer]) {
                                 pointer = (pointer + 1) < sequence.length ? pointer + 1 : 0;
                                 display.textContent = sequence[pointer];
+                                const timeDelta = new Date().getTime() - timer;
+                                cpm.textContent = `${Math.floor(60e3 / timeDelta)} ch/m`;
+                        } else {
+                                audio.play();
                         }
-                        
-                     
                   });
                 });
         </script>
