@@ -3,14 +3,35 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
 <title>App for touch typing practice</title>
+        <style>
+                body {
+                        background-color: black;
+                        color: white;
+                }
+                #display-container {
+                        padding: 10px;
+                }
+        </style>
 </head>
 <body>
         <div id="display-container"></div>
         <script src="main.js"></script>
         <script>
+                const audio = new Audio('stop-13692.mp3');
+                const display = document.querySelector('#display-container');
                 // for the first initialization
                 document.addEventListener("DOMContentLoaded", function(event) { 
+                        
                   console.log('ready');
+                  document.addEventListener("keydown", (event) => {
+                        if (event.isComposing || event.keyCode === 229) {
+                                return;
+                        }
+                        // on key  
+                        audio.play();
+                        display.textContent = event.key;
+                     
+                  });
                 });
         </script>
 </body>
