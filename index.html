@@ -39,7 +39,7 @@
                         // on key
                         if (event.key.toLowerCase() === sequence[pointer]) {
                                 pointer = (pointer + 1) < sequence.length ? pointer + 1 : 0;
-                                display.textContent = sequence[pointer];
+                                display.textContent = sequence[pointer].toUpperCase();
                                 const timeDelta = new Date().getTime() - timer;
                                 cpm.textContent = `${Math.floor(60e3 / timeDelta)} ch/m`;
                         } else {
